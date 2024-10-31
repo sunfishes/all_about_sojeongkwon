@@ -34,11 +34,90 @@ h1 {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* 시작 화면 */
+/* 시작 화면 수정 */
 .start-screen {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  align-items: center;
+}
+
+.nickname-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.ranking-button {
+  background: rgba(200, 170, 110, 0.1);
+  border: 1px solid #785A28;
+  color: #C8AA6E;
+  width: auto;
+  padding: 0.8rem 2rem;
+}
+
+.ranking-button:hover {
+  background: rgba(200, 170, 110, 0.2);
+  border-color: #C8AA6E;
+}
+
+/* 랭킹 모달 */
+.ranking-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.ranking-modal {
+  background: rgba(10, 12, 16, 0.95);
+  border: 2px solid #C8AA6E;
+  border-radius: 8px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.ranking-modal h2 {
+  color: #C8AA6E;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.close-button {
+  margin-top: 1.5rem;
+  width: 100%;
+  background: linear-gradient(to bottom, #C8AA6E, #785A28);
+}
+
+/* 스크롤바 스타일링 */
+.ranking-modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ranking-modal::-webkit-scrollbar-track {
+  background: rgba(200, 170, 110, 0.1);
+}
+
+.ranking-modal::-webkit-scrollbar-thumb {
+  background: #785A28;
+  border-radius: 4px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 input {

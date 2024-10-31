@@ -87,6 +87,7 @@ function App() {
   const [score, setScore] = useState(0);
   const [rankings, setRankings] = useState([]);  // 초기값 빈 배열로 변경
   const [answerFeedback, setAnswerFeedback] = useState(null); // 답안 피드백
+  const [showRankings, setShowRankings] = useState(false);
 
   // 랭킹 데이터 불러오기
   useEffect(() => {
@@ -180,17 +181,58 @@ const handleRetry = () => {
   
         {/* 시작 화면 */}
         {gameState === "start" && (
-          <form onSubmit={handleStart} className="start-screen">
-            <input
-              type="text"
-              value={nickname}
-              onChange={(e) => setNickname(e.target.value)}
-              placeholder="닉네임을 입력하세요"
-              required
-            />
-            <button type="submit">시작하기</button>
-          </form>
-        )}
+  <div className="start-screen">
+    <form onSubmit={handleStart} className="nickname-form">
+      <input
+        type="text"
+        value={nickname}
+        onChange={(e) => setNickname(e.target.value)}
+        placeholder="닉네임을 입력하세요"
+        required
+      />
+      <button type="submit">시작하기</button>
+    </form>
+    <button 
+      onClick={() => setShowRankings(true)} 
+      className="ranking-button"
+    >
+      랭킹 보기
+    </button>
+  </div>
+)}
+
+{/* 랭킹 모달 */}
+{showRankings && (
+  <div className="ranking-modal-overlay">
+    <div className="ranking-modal">
+      <h2>현재 랭킹</h2>
+      <div className="rankings">
+        {rankings.map((rank, index) => (
+          <div
+            key={index}
+            className="ranking-item"
+          >
+            <div className="ranking-info">
+              <img 
+                src={getTier(rank.score).icon} 
+                alt={getTier(rank.score).name} 
+                className="rank-tier-icon"
+              />
+              <span>{index + 1}. {rank.nickname}</span>
+            </div>
+            <span>{rank.score}점</span>
+          </div>
+        ))}
+      </div>
+      <button 
+        onClick={() => setShowRankings(false)}
+        className="close-button"
+      >
+        닫기
+      </button>
+    </div>
+  </div>
+)}
   
         {/* 퀴즈 화면 */}
         {gameState === "quiz" && (
